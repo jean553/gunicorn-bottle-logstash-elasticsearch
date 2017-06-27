@@ -11,13 +11,18 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
   environment_variables = {
     # used for 'dev' containers to have same permissions as current user
     "HOST_USER_UID" => Process.euid,
-
     "ENV_NAME" => "devdocker",
     "APP_PATH" => "/vagrant",
     "VIRTUAL_ENV_PATH" => "/tmp/virtual_env35",
-
     "PROJECT" => PROJECT,
   }
+
+  config.vm.define "cassandra" do |app|
+    app.vm.provider "docker" do |d|
+      d.image = "kibana"
+      d.name = "#{PROJECT}_kibana"
+    end
+  end
 
   config.ssh.insert_key = true
   config.vm.define "dev", primary: true do |app|
