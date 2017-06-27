@@ -27,5 +27,5 @@ In the example above, four workers are started.
 ## Check the service is running
 
 ```bash
-curl http://localhost:8000/ping
+curl http://localhost/ping
 ```
