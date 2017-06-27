@@ -1,5 +1,9 @@
 # gunicorn-kibana-logstash
 
+The POC contains a simple HTTP server built with Bottle.
+Gunicorn is used to start the server worker(s).
+Nginx is configured to redirect the traffic to server.
+
 ## Install the environment
 
 ```bash
