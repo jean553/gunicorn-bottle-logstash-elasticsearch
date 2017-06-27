@@ -2,14 +2,14 @@
 Main handler
 '''
 
-from bottle import route, run
+from bottle import route, run, default_app
 
 @route('/ping')
 def ping():
     return 'OK'
 
-def main():
+if __name__ == '__main__':
     run()
 
-if __name__ == '__main__':
-    main()
+# hook for gunicorn
+app = default_app()
