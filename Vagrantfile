@@ -39,8 +39,7 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
       ansible.inline = "
         set -e
         cd $APP_PATH
-        ansible-galaxy install -r build_scripts/ansible-dev/requirements.yml
-        ansible-playbook build_scripts/ansible-dev/bootstrap.yml
+        ansible-playbook bootstrap.yml
         echo 'done, you can now run `vagrant ssh`'
       "
     end
