@@ -29,3 +29,7 @@ In the example above, four workers are started.
 ```bash
 curl http://localhost/ping
 ```
+
+```bash
+curl http://localhost/post-data -X POST -d "{'message': 'hello world', 'status': 'sent'}" -H 'Content-Type: application/json'
+```
