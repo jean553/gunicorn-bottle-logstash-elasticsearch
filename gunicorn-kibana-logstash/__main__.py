@@ -11,7 +11,25 @@ def ping():
 
 @post('/post-data')
 def post_data():
-    return 'OK'
+    '''
+    Inserts posted content into ES
+    '''
+    data = request.json
+
+    date = datetime.datetime.now()
+    index = date.strftime('data-%Y-%m-%d-%H')
+
+    es_client = Elasticsearch(hosts=['elasticsearch'],)
+    helpers.bulk(
+        es_client,
+        [{
+            '_type': 'data',
+            '_index': index,
+            '_timestamp': datetime.datetime.now(),
+            'message': data['message'],
+            'status': data['status'],
+        }],
+    )
 
 if __name__ == '__main__':
     run()
