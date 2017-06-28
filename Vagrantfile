@@ -17,10 +17,25 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
     "PROJECT" => PROJECT,
   }
 
-  config.vm.define "cassandra" do |app|
+  config.vm.define "elasticsearch" do |app|
     app.vm.provider "docker" do |d|
-      d.image = "kibana"
+      d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
+      d.name = "#{PROJECT}_elasticsearch"
+      d.env = {
+        "HTTP_HOST" => "0.0.0.0",
+        "TRANSPORT_HOST" => "127.0.0.1",
+      }
+    end
+  end
+
+  config.vm.define "kibana" do |app|
+    app.vm.provider "docker" do |d|
+      d.image = "docker.elastic.co/kibana/kibana:5.4.3"
       d.name = "#{PROJECT}_kibana"
+      d.link "#{PROJECT}_elasticsearch:elasticsearch"
+      d.env = {
+        "SERVER_HOST" => "0.0.0.0",
+      }
     end
   end
 
