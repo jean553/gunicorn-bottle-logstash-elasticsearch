@@ -2,14 +2,14 @@
 Main handler
 '''
 
-from bottle import route, run, default_app
+from bottle import route, post, run, default_app
 from elasticsearch import helpers
 
 @route('/ping')
 def ping():
     return 'OK'
 
-@route('/post-data')
+@post('/post-data')
 def post_data():
     return 'OK'
 
