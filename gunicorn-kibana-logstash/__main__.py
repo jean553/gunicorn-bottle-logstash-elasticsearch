@@ -2,8 +2,10 @@
 Main handler
 '''
 
-from bottle import route, post, run, default_app
-from elasticsearch import helpers
+import datetime
+
+from bottle import route, post, run, request, default_app
+from elasticsearch import Elasticsearch, helpers
 
 @route('/ping')
 def ping():
