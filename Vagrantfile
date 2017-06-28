@@ -19,11 +19,12 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
 
   config.vm.define "elasticsearch" do |app|
     app.vm.provider "docker" do |d|
-      d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
+      d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.4.3"
       d.name = "#{PROJECT}_elasticsearch"
       d.env = {
-        "HTTP_HOST" => "0.0.0.0",
-        "TRANSPORT_HOST" => "127.0.0.1",
+        "http.host" => "0.0.0.0",
+        "transport.host" => "127.0.0.1",
+        "xpack.security.enabled" => "false",
       }
     end
   end
@@ -34,7 +35,8 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
       d.name = "#{PROJECT}_kibana"
       d.link "#{PROJECT}_elasticsearch:elasticsearch"
       d.env = {
-        "SERVER_HOST" => "0.0.0.0",
+        "server.host" => "0.0.0.0",
+        "xpack.security.enabled" => "false",
       }
     end
   end
