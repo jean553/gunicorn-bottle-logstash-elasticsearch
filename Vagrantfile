@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
 
   config.vm.define "elasticsearch" do |app|
     app.vm.provider "docker" do |d|
-      d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.2.2"
+      d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.4.3"
       d.name = "#{PROJECT}_elasticsearch"
       d.env = {
         "HTTP_HOST" => "0.0.0.0",
