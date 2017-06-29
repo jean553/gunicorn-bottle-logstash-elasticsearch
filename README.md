@@ -31,5 +31,8 @@ curl http://localhost/ping
 ```
 
 ```bash
-curl http://localhost/post-data -X POST -d "{'message': 'hello world', 'status': 'sent'}" -H 'Content-Type: application/json'
+curl http://localhost/post-data \
+    -X POST \
+    -d "{'message': 'hello world', 'status': 'sent'}" \
+    -H 'Content-Type: application/json'
 ```
