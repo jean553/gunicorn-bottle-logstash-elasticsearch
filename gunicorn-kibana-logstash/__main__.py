@@ -27,7 +27,7 @@ def post_data():
         [{
             '_type': 'data',
             '_index': index,
-            '_timestamp': datetime.datetime.now(),
+            'timestamp': datetime.datetime.now(),
             'message': data['message'],
             'status': data['status'],
         }],
