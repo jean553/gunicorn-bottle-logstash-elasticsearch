@@ -7,6 +7,8 @@ import datetime
 from bottle import route, post, run, request, default_app
 from elasticsearch import Elasticsearch, helpers
 
+from kibana_logger import KibanaLogger
+
 @route('/ping')
 def ping():
     return 'OK'
@@ -16,6 +18,13 @@ def post_data():
     '''
     Inserts posted content into ES
     '''
+    logger = KibanaLogger(
+        {
+            'api_call': 'post-data',
+            'method': 'post',
+        }
+    )
+
     data = request.json
 
     date = datetime.datetime.now()
@@ -33,8 +42,7 @@ def post_data():
         }],
     )
 
-if __name__ == '__main__':
-    run()
+    logger.info({'step': 'end'})
 
 # hook for gunicorn
 app = default_app()
