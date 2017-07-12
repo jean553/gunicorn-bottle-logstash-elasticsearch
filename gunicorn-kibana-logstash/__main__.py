@@ -7,6 +7,8 @@ import datetime
 from bottle import route, post, run, request, default_app
 from elasticsearch import Elasticsearch, helpers
 
+from kibana_logger import KibanaLogger
+
 @route('/ping')
 def ping():
     return 'OK'
