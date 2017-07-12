@@ -3,6 +3,8 @@ Main handler
 '''
 
 import datetime
+import logging
+import logstash
 
 from bottle import route, post, run, request, default_app
 from elasticsearch import Elasticsearch, helpers
@@ -24,6 +26,17 @@ def post_data():
             'method': 'post',
         }
     )
+
+    logstash_handler = logging.getLogger('python-logstash-logger')
+    logstash_handler.setLevel(logging.INFO)
+    logstash_handler.addHandler(
+        logstash.LogstashHandler(
+            'elasticsearch',
+            5044,
+        )
+    )
+
+    logstash_handler.info('python-logstash: post data started')
 
     data = request.json
 

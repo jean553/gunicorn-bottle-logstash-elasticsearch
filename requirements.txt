@@ -2,3 +2,4 @@ gunicorn
 bottle
 elasticsearch
 kibana_logger
+python-logstash
