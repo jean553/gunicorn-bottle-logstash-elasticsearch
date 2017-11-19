@@ -4,35 +4,41 @@
 
   tasks:
 
-    - name: install nginx
+    - name: net-tools installed for debugging
+      apt:
+        name: net-tools
+        state: present
+        update_cache: yes
+
+    - name: nginx installed
       apt:
         name: nginx
         state: present
         update_cache: yes
 
-    - name: copy nginx configuration
+    - name: nginx configuration copied
       copy:
         src: nginx.conf
         dest: /etc/nginx/nginx.conf
 
-    - name: restart nginx
+    - name: nginx restarted
       service:
         name: nginx
         state: restarted
 
-    - name: install pip packages tox
+    - name: pip packages installed through tox
       pip:
         name="tox"
         state=latest
 
-    - name: create tox environment
+    - name: tox environment created
       shell: >
         tox -r -e {{ ansible_env.ENV_NAME }}
       args:
         chdir: "{{ ansible_env.APP_PATH }}"
         creates: "{{ ansible_env.VIRTUAL_ENV_PATH }}"
 
-    - name: copy folder destination and virtualenv activation when ssh
+    - name: default folder and virtualenv activation enabled when ssh
       lineinfile:
         path: /home/vagrant/.zshrc
         line: "cd /vagrant && source /tmp/virtual_env35/bin/activate"
