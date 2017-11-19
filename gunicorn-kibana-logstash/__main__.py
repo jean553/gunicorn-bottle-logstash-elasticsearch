@@ -2,17 +2,11 @@
 Main handler
 '''
 
-import datetime
-import logging
-import logstash
-
 from bottle import (
     route,
     post,
-    request,
     default_app,
 )
-from elasticsearch import Elasticsearch, helpers
 
 from kibana_logger import KibanaLogger
 
@@ -25,7 +19,7 @@ def ping():
 @post('/post-data')
 def post_data():
     '''
-    Inserts posted content into ES
+    Logs some data into Logstash.
     '''
     logger = KibanaLogger(
         {
@@ -33,35 +27,6 @@ def post_data():
             'method': 'post',
         }
     )
-
-    logstash_handler = logging.getLogger('python-logstash-logger')
-    logstash_handler.setLevel(logging.INFO)
-    logstash_handler.addHandler(
-        logstash.LogstashHandler(
-            'elasticsearch',
-            5044,
-        )
-    )
-
-    logstash_handler.info('python-logstash: post data started')
-
-    data = request.json
-
-    date = datetime.datetime.now()
-    index = date.strftime('data-%Y-%m-%d-%H')
-
-    es_client = Elasticsearch(hosts=['elasticsearch'],)
-    helpers.bulk(
-        es_client,
-        [{
-            '_type': 'data',
-            '_index': index,
-            'timestamp': datetime.datetime.now(),
-            'message': data['message'],
-            'status': data['status'],
-        }],
-    )
-
     logger.info({'step': 'end'})
 
 
