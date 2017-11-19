@@ -2,3 +2,4 @@
 *.retry
 *.pyc
 *.swp
+.mypy_cache/
