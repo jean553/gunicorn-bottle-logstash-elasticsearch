@@ -6,14 +6,21 @@ import datetime
 import logging
 import logstash
 
-from bottle import route, post, run, request, default_app
+from bottle import (
+    route,
+    post,
+    request,
+    default_app,
+)
 from elasticsearch import Elasticsearch, helpers
 
 from kibana_logger import KibanaLogger
 
+
 @route('/ping')
 def ping():
     return 'OK'
+
 
 @post('/post-data')
 def post_data():
@@ -56,6 +63,7 @@ def post_data():
     )
 
     logger.info({'step': 'end'})
+
 
 # hook for gunicorn
 app = default_app()
