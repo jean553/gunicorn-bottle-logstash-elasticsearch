@@ -6,19 +6,19 @@ Nginx is configured to redirect the traffic to server.
 
 ## Install the environment
 
-```bash
+```sh
 vagrant up
 ```
 
 ## Connect to the development container
 
-```bash
+```sh
 vagrant ssh
 ```
 
 ## Start the service
 
-```bash
+```sh
 gunicorn -w 4 gunicorn-bottle-logstash-elasticsearch.__main__:app
 ```
 
@@ -26,17 +26,17 @@ In the example above, four workers are started.
 
 ## Run tests
 
-```bash
+```sh
 py.test
 ```
 
 ## Check the service is running
 
-```bash
+```sh
 curl http://localhost/ping
 ```
 
-```bash
+```sh
 curl http://localhost/post-data \
     -X POST \
     -d '{"message": "hello world", "status": "sent"}' \
