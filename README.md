@@ -24,6 +24,12 @@ gunicorn -w 4 gunicorn-bottle-logstash-elasticsearch.__main__:app
 
 In the example above, four workers are started.
 
+## Run tests
+
+```bash
+py.test
+```
+
 ## Check the service is running
 
 ```bash
