@@ -1,3 +1,7 @@
 gunicorn
 bottle
 kibana_logger
+
+# for tests
+pytest
+requests
