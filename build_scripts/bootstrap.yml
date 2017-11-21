@@ -4,17 +4,15 @@
 
   tasks:
 
-    - name: net-tools installed for debugging
+    - name: net-tools, nginx, rsyslog installed
       apt:
-        name: net-tools
-        state: present
-        update_cache: yes
-
-    - name: nginx installed
-      apt:
-        name: nginx
-        state: present
-        update_cache: yes
+        name="{{ item }}"
+        state=present
+        update_cache=yes
+      with_items:
+        - net-tools
+        - nginx
+        - rsyslog
 
     - name: nginx configuration copied
       copy:
