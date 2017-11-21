@@ -13,6 +13,17 @@ from kibana_logger import KibanaLogger
 
 @route('/ping')
 def ping():
+    '''
+    Route to check if the service is alive.
+    '''
+    logger = KibanaLogger(
+        {
+            'api_call': 'ping',
+            'method': 'get',
+        }
+    )
+    logger.info({'step': 'end'})
+
     return 'OK'
 
 
