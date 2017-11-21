@@ -4,7 +4,7 @@
 
   tasks:
 
-    - name: net-tools, nginx, rsyslog installed
+    - name: net-tools, nginx installed
       apt:
         name="{{ item }}"
         state=present
@@ -12,7 +12,6 @@
       with_items:
         - net-tools
         - nginx
-        - rsyslog
 
     - name: nginx configuration copied
       copy:
