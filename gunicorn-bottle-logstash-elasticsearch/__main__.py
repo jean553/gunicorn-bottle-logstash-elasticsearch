@@ -34,7 +34,7 @@ def post_data():
     '''
     logger = KibanaLogger(
         {
-            'api_call': 'post-data',
+            'api_call': 'post_data',
             'method': 'post',
         }
     )
