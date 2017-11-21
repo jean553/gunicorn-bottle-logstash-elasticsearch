@@ -53,9 +53,4 @@ http://kibana-container-ip-address:5601
 
 The ip address of the container can be found using `docker inspect gunicorn-bottle-logstash-elasticsearch_kibana`.
 
-The index pattern is `data-*`.
-
-Optionally, you can configure a time field: go into
-`Advanced Settings` > `metaFields`. Add the field `timestamp`.
-Go back the to the index creation page, `timestamp` can now be selected
-into the `metaFields` options list.
+The index pattern is `logstash-*` and the time field is `@timestamp`.
