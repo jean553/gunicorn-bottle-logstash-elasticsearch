@@ -53,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
     app.vm.provider "docker" do |d|
       d.image = "allansimon/allan-docker-dev-python"
       d.name = "#{PROJECT}_dev"
-      d.link "#{PROJECT}_elasticsearch:elasticsearch"
+      d.link "#{PROJECT}_logstash:logstash"
       d.has_ssh = true
       d.env = environment_variables
     end
