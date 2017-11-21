@@ -34,6 +34,9 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
       d.image = "docker.elastic.co/logstash/logstash:5.5.0"
       d.name = "#{PROJECT}_logstash"
       d.link "#{PROJECT}_elasticsearch:elasticsearch"
+      d.env = {
+        "path.config" => "/vagrant/build_scripts/logstash.conf"
+      }
     end
   end
 
