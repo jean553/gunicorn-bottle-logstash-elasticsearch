@@ -45,3 +45,7 @@
       lineinfile:
         path: /home/vagrant/.zshrc
         line: "cd /vagrant && source /tmp/virtual_env35/bin/activate"
+
+    # restarted at the end to prevent ansible logs to be sent to logstash
+    - name: syslog-ng restarted
+      command: service syslog-ng restart
