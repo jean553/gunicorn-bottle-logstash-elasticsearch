@@ -17,13 +17,6 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
     "PROJECT" => PROJECT,
   }
 
-  config.vm.define "logstash" do |app|
-    app.vm.provider "docker" do |d|
-      d.image = "docker.elastic.co/logstash/logstash:5.5.0"
-      d.name = "#{PROJECT}_logstash"
-    end
-  end
-
   config.vm.define "elasticsearch" do |app|
     app.vm.provider "docker" do |d|
       d.image = "docker.elastic.co/elasticsearch/elasticsearch:5.4.3"
@@ -33,6 +26,14 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
         "transport.host" => "127.0.0.1",
         "xpack.security.enabled" => "false",
       }
+    end
+  end
+
+  config.vm.define "logstash" do |app|
+    app.vm.provider "docker" do |d|
+      d.image = "docker.elastic.co/logstash/logstash:5.5.0"
+      d.name = "#{PROJECT}_logstash"
+      d.link "#{PROJECT}_elasticsearch:elasticsearch"
     end
   end
 
