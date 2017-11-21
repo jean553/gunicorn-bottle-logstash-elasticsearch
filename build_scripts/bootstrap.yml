@@ -18,6 +18,11 @@
         src: nginx.conf
         dest: /etc/nginx/nginx.conf
 
+    - name: syslog-ng configuration copied
+      copy:
+        src: syslog-ng.conf
+        dest: /etc/syslog-ng/syslog-ng.conf
+
       # FIXME: #21 I should use "service" directive instead of "command"
       # but nginx does not start when I use "service" directive;
       # this requires investigation
