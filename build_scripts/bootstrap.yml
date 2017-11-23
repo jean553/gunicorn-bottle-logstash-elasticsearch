@@ -4,7 +4,7 @@
 
   tasks:
 
-    - name: net-tools, nginx installed
+    - name: net-tools, nginx, rsyslog installed
       apt:
         name="{{ item }}"
         state=present
@@ -42,6 +42,12 @@
         path: /home/vagrant/.zshrc
         line: "cd /vagrant && source /tmp/virtual_env35/bin/activate"
 
-    # restarted at the end to prevent ansible logs to be sent to logstash
-    - name: syslog-ng restarted
-      command: service syslog-ng restart
+    # syslog-ng is the default logging management solution for phusion/base-image
+    # but is a way to complicated to use with Logstash or Elasticsearch
+    # (requires specific versions of manually installed packages);
+    # instead of updating the base image or changing the base image itself,
+    # I prefer to still use the useful functions of phusion/base-image
+    # so I simply manually kill syslog-ng here in order to run rsyslog;
+    # furthermore, syslog-ng is not handled by ansible `service` action
+    - name: syslog-ng stopped
+      shell: "kill $(cat /run/syslog-ng.pid)"
