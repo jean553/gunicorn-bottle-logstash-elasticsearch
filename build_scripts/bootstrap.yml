@@ -24,9 +24,6 @@
         src: rsyslog.conf
         dest: /etc/rsyslog.d/50-default.conf
 
-      # FIXME: #21 I should use "service" directive instead of "command"
-      # but nginx does not start when I use "service" directive;
-      # this requires investigation
     - name: nginx restarted
       command: service nginx restart
 
