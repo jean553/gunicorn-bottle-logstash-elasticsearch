@@ -1,4 +1,4 @@
-# gunicorn-bottle-logstash-elasticsearch
+# gunicorn-bottle-rsyslog-elasticsearch
 
 The POC contains a simple HTTP server built with Bottle.
 Gunicorn is used to start the server worker(s).
@@ -19,7 +19,7 @@ vagrant ssh
 ## Start the service
 
 ```sh
-gunicorn -w 4 gunicorn-bottle-logstash-elasticsearch.__main__:app
+gunicorn -w 4 gunicorn-bottle-rsyslog-elasticsearch.__main__:app
 ```
 
 In the example above, four workers are started.
@@ -51,6 +51,6 @@ Connect to the Kibana web interface:
 http://kibana-container-ip-address:5601
 ```
 
-The ip address of the container can be found using `docker inspect gunicorn-bottle-logstash-elasticsearch_kibana`.
+The ip address of the container can be found using `docker inspect gunicorn-bottle-rsyslog-elasticsearch_kibana`.
 
-The index pattern is `logstash-*` and the time field is `@timestamp`.
+The index pattern is `logs-*` and the time field is `@timestamp`.

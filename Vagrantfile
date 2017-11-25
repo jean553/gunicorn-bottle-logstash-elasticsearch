@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby ts=2 sw=2 expandtab :
 
-PROJECT = "gunicorn-bottle-logstash-elasticsearch"
+PROJECT = "gunicorn-bottle-rsyslog-elasticsearch"
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 VAGRANTFILE_VERSION = "2"
@@ -29,17 +29,6 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
     end
   end
 
-  config.vm.define "logstash" do |app|
-    app.vm.provider "docker" do |d|
-      d.image = "docker.elastic.co/logstash/logstash:5.5.0"
-      d.name = "#{PROJECT}_logstash"
-      d.link "#{PROJECT}_elasticsearch:elasticsearch"
-      d.env = {
-        "path.config" => "/vagrant/build_scripts/logstash.conf"
-      }
-    end
-  end
-
   config.vm.define "kibana" do |app|
     app.vm.provider "docker" do |d|
       d.image = "docker.elastic.co/kibana/kibana:5.4.3"
@@ -57,7 +46,6 @@ Vagrant.configure(VAGRANTFILE_VERSION) do |config|
     app.vm.provider "docker" do |d|
       d.image = "allansimon/allan-docker-dev-python"
       d.name = "#{PROJECT}_dev"
-      d.link "#{PROJECT}_logstash:logstash"
       d.link "#{PROJECT}_elasticsearch:elasticsearch"
       d.has_ssh = true
       d.env = environment_variables
