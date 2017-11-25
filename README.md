@@ -4,6 +4,9 @@ The POC contains a simple HTTP server built with Bottle.
 Gunicorn is used to start the server worker(s).
 Nginx is configured to redirect the traffic to server.
 
+This POC shows how to use a logger and how to redirect these logs
+to Elasticsearch for usage with Kibana.
+
 ## Install the environment
 
 ```sh
