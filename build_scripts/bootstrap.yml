@@ -4,7 +4,7 @@
 
   tasks:
 
-    - name: net-tools, nginx, rsyslog installed
+    - name: net-tools, nginx, rsyslog and rsyslog elasticsearch module installed
       apt:
         name="{{ item }}"
         state=present
@@ -13,6 +13,7 @@
         - net-tools
         - nginx
         - rsyslog
+        - rsyslog-elasticsearch
 
     - name: nginx configuration copied
       copy:
